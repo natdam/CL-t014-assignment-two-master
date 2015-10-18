@@ -1,0 +1,97 @@
+<!-- Simple header with scrollable tabs. -->
+<html>
+
+    <head>    
+
+<link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.indigo-pink.min.css">
+<script src="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.min.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+<style type="text/css">
+html, body { height: 100%; margin: 0; padding: 0; }
+#map { height: 80%; }
+</style>
+        
+    </head>
+    
+    <body>
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  <header class="mdl-layout__header">
+    <div class="mdl-layout__header-row">
+      <!-- Title -->
+      <span class="mdl-layout-title">YYST</span>
+    </div>
+    <!-- Tabs -->
+    <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+      <a href="#scroll-tab-1" class="mdl-layout__tab is-active">Recording</a>
+      <a href="#scroll-tab-2" class="mdl-layout__tab">View</a>
+      <a href="#scroll-tab-3" class="mdl-layout__tab">Settings</a>
+     
+    </div>
+  </header>
+  <div class="mdl-layout__drawer">
+    <span class="mdl-layout-title">YYST - Drawer</span>
+  </div>
+  <main class="mdl-layout__content">
+
+    <section class="mdl-layout__tab-panel is-active" id="scroll-tab-1">
+      <div class="page-content">
+          <!-- Your content goes here -->
+       <div id="map"></div> 
+        <button id='start' class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"onClick = "startRunning()">
+  Start Run
+</button>
+<button id='stop' class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"onClick = "stopRunning()">
+  Stop Run
+</button>
+        
+        
+        </div>
+        
+    </section>
+
+    <section class="mdl-layout__tab-panel" id="scroll-tab-2">
+      <div class="page-content"><!-- Your content goes here -->
+      <output id="outputArea"></output>
+    </div>
+    </section>
+    <section class="mdl-layout__tab-panel" id="scroll-tab-3">
+      <div class="page-content"><!-- Your content goes here --></div>
+    </section>
+   
+   
+    
+  </main>
+</div>
+
+        <script>
+       var map;
+function mapLocation(position) {
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: position.coords.latitude, lng: position.coords.longitude},
+    zoom: 17
+  }); 
+}
+        navigator.geolocation.getCurrentPosition(mapLocation)
+            
+        function startRunning(){
+          startTime = new Date().getTime();//document.getElementById("outputArea");
+
+          //outputArea.innerHTML = startTime;
+        }
+
+        function stopRunning(){
+           endTime = new Date().getTime();
+
+        //displaying time between pressing start and stop in seconds
+        outputArea.innerHTML = (endTime - startTime)/1000;
+        }
+        //outputArea.innerHTML = endTime - startTime;
+        
+        </script>
+
+<script async defer
+  src="https://maps.googleapis.com/maps/api/js?v=3&amp;key=&amp;callback=initMap">
+    </script>  
+    </body>
+    </html>
